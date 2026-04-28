@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS S3 Static Website</title>
+  <style>
+    :root {
+      --bg1: #050816;
+      --bg2: #120b2e;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --text: #f5f7ff;
+      --muted: rgba(245, 247, 255, 0.78);
+      --gold: #f7c948;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(920px, calc(100% - 32px));
+      padding: 24px;
+      animation: fadeIn 0.9s ease-out;
+    }
+
+    .card {
+      padding: 42px 36px;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    h1 .highlight {
+      color: var(--gold);
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+      text-align: left;
+    }
+
+    .feature {
+      padding: 18px 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .feature p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.35rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow: auto;
+      }
+
+      .card {
+        padding: 28px 20px;
+        border-radius: 22px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .lead {
+        line-height: 1.7;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="badge">☁️ AWS S3 Static Website</div>
+
+      <h1>Host a <span class="highlight">beautiful</span> static website on AWS S3</h1>
+
+      <p class="lead">
+        Amazon S3 lets you host HTML, CSS, and JavaScript files as a fast, scalable, and low-cost static website.
+        It is a great choice for portfolios, landing pages, documentation sites, and simple web apps.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Easy deployment</h3>
+          <p>Upload your site files to an S3 bucket and enable static website hosting in minutes.</p>
+        </div>
+
+        <div class="feature">
+          <h3>Scalable hosting</h3>
+          <p>S3 handles traffic reliably without server management or complex infrastructure.</p>
+        </div>
+
+        <div class="feature">
+          <h3>Modern design</h3>
+          <p>Glassmorphism, gradients, and motion effects make the page feel premium and polished.</p>
+        </div>
+      </div>
+
+      <div class="icon-row" aria-hidden="true">
+        <div class="icon">✨</div>
+        <div class="icon">🚀</div>
+        <div class="icon">💻</div>
+        <div class="icon">🌐</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
