@@ -49,6 +49,7 @@ resource "aws_s3_object" "index" {
 
 }
 
+
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.s3.id
 
