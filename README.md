@@ -345,20 +345,15 @@ Open the URL in your browser to view the live static website. 🎉
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Mohankumar U**
 
-- 🐙 [GitHub](https://github.com/your-username)
-- 💼 [LinkedIn](https://linkedin.com/in/your-profile)
+- 🐙 [GitHub](https://github.com/mohan41204)
+- 💼 [LinkedIn](https://www.linkedin.com/in/mohandevop)
 
 > _Open to collaboration and feedback! Feel free to fork the repo, open an issue, or connect on LinkedIn._
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 <div align="center">
 
