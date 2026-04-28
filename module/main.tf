@@ -42,7 +42,7 @@ resource "aws_s3_bucket_policy" "public_read" {
 resource "aws_s3_object" "index" {
   bucket = aws_s3_bucket.s3.id
   key    = var.file
-  source = "./website/index.html"
+  source = var.path
   content_type = "text/html"
 
   depends_on = [aws_s3_bucket_policy.public_read]
