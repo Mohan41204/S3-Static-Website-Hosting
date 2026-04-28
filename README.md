@@ -70,7 +70,7 @@ Rather than writing all Terraform resources in a single flat file, this project 
 ```
 
 **Key Design Decision — Modular Terraform:**
-The infrastructure logic lives inside `module/`, making it reusable across multiple environments (dev, staging, prod). The root `main.tf` simply calls the module and passes in variables — keeping the root layer clean and the module self-contained.
+The infrastructure logic is implemented using a reusable Terraform module inside the module/ directory. The root main.tf calls this module and passes input variables, keeping the root configuration clean and maintainable. This structure also makes it easy to extend the setup for multiple environments in the future.
 
 ---
 
