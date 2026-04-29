@@ -352,7 +352,7 @@ jobs:
 | **Download Terraform Plan**   | Retrieves the saved execution plan in the deployment job                            |
 | **Terraform Apply**           | Applies the saved plan to provision or update AWS infrastructure                    |
 
-💡 Pro Tip: You’ve already implemented a strong practice by separating testing (lint + validate + plan) and deployment (apply) into two jobs. To make it production-grade, you can add a manual approval step (using environments in GitHub Actions) before the `Terraform Apply` stage to avoid accidental infrastructure changes.
+> 💡 **Pro Tip:** Split `plan` and `apply` into separate jobs and add a manual approval step before apply to prevent accidental changes.
 ---
 
 ## 🌐 Output
@@ -364,13 +364,14 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-website_url = "http://your-bucket-name.s3-website-us-east-1.amazonaws.com"
+s3_bucket_name = "your s3 bucket name"
+root_website_url = "http://your-bucket-name.s3-website-us-east-1.amazonaws.com"
 ```
 
 You can also retrieve the output at any time by running:
 
 ```bash
-terraform output website_url
+terraform output root_website_url
 ```
 
 Open the URL in your browser to view the live static website. 🎉
@@ -378,8 +379,6 @@ Open the URL in your browser to view the live static website. 🎉
 ---
 
 ## 📸 Screenshots
-
-> _Add your own screenshots to the `screenshots/` folder and update the paths below._
 
 | GitHub Actions — Pipeline Success | Live S3 Static Website |
 |---|---|
