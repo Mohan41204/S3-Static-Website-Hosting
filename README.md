@@ -181,7 +181,7 @@ The **root `main.tf`** acts as the caller — it references the module, passes i
 
 Ensure the following are installed and configured before proceeding:
 
-- ✅ [Terraform](https://developer.hashicorp.com/terraform/downloads) (v1.0 or later)
+- ✅ [Terraform](https://developer.hashicorp.com/terraform/downloads) (>= 1.5.0)
 - ✅ [AWS CLI](https://aws.amazon.com/cli/) with valid credentials configured
 - ✅ A GitHub account with repository access
 
@@ -190,8 +190,8 @@ Ensure the following are installed and configured before proceeding:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/s3-static-website-terraform-modules.git
-cd s3-static-website-terraform-modules
+git clone https://github.com/Mohan41204/S3-Static-Website-Hosting.git
+cd S3-Static-Website-Hosting
 ```
 
 ### 2️⃣ Configure AWS Credentials Locally
@@ -237,10 +237,10 @@ To allow GitHub Actions to authenticate with AWS, add these secrets to your GitH
 
 **Settings → Secrets and variables → Actions → New repository secret**
 
-| Secret Name | Value |
+| Secret | Description |
 |---|---|
-| `AWS_ACCESS_KEY_ID` | Your AWS Access Key ID |
-| `AWS_SECRET_ACCESS_KEY` | Your AWS Secret Access Key |
+| `MY_ARN` | GitHub Actions uses OpenID Connect (OIDC) to securely authenticate with AWS without storing long-term credentials. Push to `main` (or open a PR) — the pipeline handles everything from there.
+
 
 ---
 
