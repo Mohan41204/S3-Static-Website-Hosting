@@ -388,19 +388,6 @@ Open the URL in your browser to view the live static website. 🎉
 
 ---
 
-## 🔮 Future Improvements
-
-| Enhancement | Description | AWS Service |
-|---|---|---|
-| ☁️ **CDN Layer** | Serve content globally with low latency and caching | AWS CloudFront |
-| 🌍 **Custom Domain** | Map a professional domain name (e.g., `www.mysite.com`) | AWS Route 53 |
-| 🔒 **HTTPS / SSL** | Enable secure `https://` access with a free managed certificate | AWS ACM |
-| 📊 **Monitoring & Logging** | Track website traffic, errors, and access patterns | AWS CloudWatch + S3 Access Logs |
-| 🌿 **Multi-Environment** | Deploy separate `dev`, `staging`, and `prod` stacks | Terraform Workspaces |
-| 🧪 **Terraform Validation** | Add `terraform fmt` and `terraform validate` checks to the pipeline | GitHub Actions |
-
----
-
 ## 👨‍💻 Author
 
 **Mohankumar U**
