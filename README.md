@@ -39,11 +39,11 @@ Rather than writing all Terraform resources in a single flat file, this project 
  │        GitHub Actions              │
  │        CI/CD Pipeline              │
  │                                    │
- │  ① Checkout Code                  │
- │  ② Configure AWS Credentials      │
- │  ③ terraform init                 │
- │  ④ terraform plan                 │
- │  ⑤ terraform apply                │
+ │  ① Checkout Code                   │
+ │  ② Configure AWS Credentials       │
+ │  ③ terraform init                  │
+ │  ④ terraform plan                  │
+ │  ⑤ terraform apply                 │
  └─────────┬──────────────────────────┘
            │  Provisions Infrastructure
            ▼
