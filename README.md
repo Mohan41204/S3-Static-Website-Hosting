@@ -104,24 +104,24 @@ s3-static-website-terraform-modules/
 │
 ├── 📁 .github/
 │   └── 📁 workflows/
-│       └── 📄 pipeline.yaml        # GitHub Actions CI/CD pipeline definition
+│       └── 📄 pipeline.yaml        
 │
 ├── 📁 WebSite/
-│   └── 📄 index.html               # Static website HTML content
+│   └── 📄 index.html               
 │
-├── 📁 module/                       # Reusable Terraform child module
-│   ├── 📄 main.tf                  # S3 bucket resource definitions (core logic)
-│   ├── 📄 variable.tf              # Input variables accepted by the module
-│   └── 📄 output.tf                # Outputs exposed by the module (e.g., website URL)
+├── 📁 module/                      
+│   ├── 📄 main.tf                  
+│   ├── 📄 variable.tf              
+│   └── 📄 output.tf                
 │
-├── 📄 main.tf                      # Root config — calls the child module
-├── 📄 provider.tf                  # AWS provider and region configuration
-├── 📄 backend.tf                   # Remote backend (S3 + DynamoDB for state management)
-├── 📄 variable.tf                  # Root-level input variables
-├── 📄 output.tf                    # Root-level outputs (website URL, bucket name)
-├── 📄 .terraform.lock.hcl          # Provider version lock file (committed to Git)
-├── 📄 .gitignore                   # Excludes .terraform/, *.tfstate, secrets from Git
-└── 📄 README.md                    # Project documentation
+├── 📄 main.tf                      
+├── 📄 provider.tf                  
+├── 📄 backend.tf                   
+├── 📄 variable.tf                  
+├── 📄 output.tf                    
+├── 📄 .terraform.lock.hcl          
+├── 📄 .gitignore                   
+└── 📄 README.md                    
 ```
 
 ### File Responsibilities at a Glance
@@ -228,8 +228,6 @@ Provision the AWS resources:
 ```bash
 terraform apply
 ```
-
-Type `yes` when prompted. After completion, the S3 website URL will be displayed in the output.
 
 ### 6️⃣ Add GitHub Secrets for CI/CD
 
