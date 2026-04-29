@@ -382,7 +382,7 @@ Open the URL in your browser to view the live static website. 🎉
 
 | GitHub Actions — Pipeline Success | Live S3 Static Website |
 |---|---|
-| ![CI/CD Pipeline](./screenshots/pipeline-success.png) | ![S3 Website](./screenshots/website-output.png) |
+| ![CI/CD Pipeline](https://github.com/Mohan41204/S3-Static-Website-Hosting/blob/main/Screanshot/Screenshot%202026-04-29%20224423.png?raw=true) | ![S3 Website](https://github.com/Mohan41204/S3-Static-Website-Hosting/blob/main/Screanshot/Screenshot%202026-04-29%20225451.png?raw=true) |
 
 > 📝 **Tip:** Fork this repo, add your AWS secrets, push a commit to `main`, and watch the pipeline run live in the Actions tab.
 
