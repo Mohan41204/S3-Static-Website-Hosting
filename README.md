@@ -249,51 +249,110 @@ To allow GitHub Actions to authenticate with AWS, add these secrets to your GitH
 The pipeline is defined in `.github/workflows/pipeline.yaml` and triggers automatically on every push to the `main` branch.
 
 ```yaml
-name: Terraform CI/CD Pipeline
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:                 
+      - '**.tf'
+      - '**.tfvars'
+      - '**.tfvars.json'
+      - '.terraform.lock.hcl'
+      - '.github/workflows/terraform.yml'
+  pull_request:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  terraform-deploy:
-    name: Deploy Infrastructure
+  Testing_Terraform_code:
+    name: Testing terraform code
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v4
 
-      - name: 🔐 Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          role-to-assume: ${{ secrets.MY_ARN }}
+          aws-region: ap-south-1
 
-      - name: ⚙️ Terraform Init
-        run: terraform init
+      - name: Install TFLint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
 
-      - name: 🔍 Terraform Plan
-        run: terraform plan
+      - name: Run TFLint
+        run: tflint
 
-      - name: 🚀 Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan -input=false
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: tfplan
+
+  Creating_Infra:
+    name: AWS infrastructure creation
+    needs: Testing_Terraform_code
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.MY_ARN }}
+          aws-region: ap-south-1
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -input=false tfplan
 ```
 
 ### Pipeline Stages Explained
 
-| Stage | What It Does |
-|---|---|
-| **Checkout Code** | Pulls the latest code from the repository into the runner |
-| **Configure AWS Credentials** | Authenticates securely with AWS using GitHub Secrets |
-| **Terraform Init** | Initialises providers and connects to the remote backend |
-| **Terraform Plan** | Generates an execution plan — shows what will change |
-| **Terraform Apply** | Applies the plan and provisions/updates AWS infrastructure |
+| Stage                         | What It Does                                                                        |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| **Checkout Code**             | Pulls the latest Terraform code from the repository into the GitHub Actions runner  |
+| **Setup Terraform**           | Installs and configures the Terraform CLI in the runner environment                 |
+| **Configure AWS Credentials** | Authenticates securely with AWS using OIDC and GitHub Secrets (IAM Role assumption) |
+| **Install TFLint**            | Installs TFLint to analyze Terraform code for best practices and potential issues   |
+| **Run TFLint**                | Lints the Terraform code to catch errors and enforce standards                      |
+| **Terraform Init**            | Initializes Terraform, downloads providers, and connects to the backend             |
+| **Terraform Validate**        | Validates the Terraform configuration syntax and structure                          |
+| **Terraform Plan**            | Generates an execution plan and saves it as an artifact (`tfplan`)                  |
+| **Upload Terraform Plan**     | Stores the generated plan file for use in the next job                              |
+| **Download Terraform Plan**   | Retrieves the saved execution plan in the deployment job                            |
+| **Terraform Apply**           | Applies the saved plan to provision or update AWS infrastructure                    |
 
-> 💡 **Pro Tip:** For production pipelines, separate `plan` and `apply` into two jobs with a manual approval step between them to prevent unintended infrastructure changes.
-
+💡 Pro Tip: You’ve already implemented a strong practice by separating testing (lint + validate + plan) and deployment (apply) into two jobs. To make it production-grade, you can add a manual approval step (using environments in GitHub Actions) before the `Terraform Apply` stage to avoid accidental infrastructure changes.
 ---
 
 ## 🌐 Output
